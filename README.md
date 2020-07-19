@@ -27,6 +27,18 @@ TBD
 
 La implementación de los algoritmos esta en `src/`
 
+El modelo Hebbiano se puede usar con la clase `Hebbiano` exportada en `hebbiano.py`
+
+```python
+from hebbiano import Hebbiano
+
+hebbiano = Hebbiano('./dataset/tp2_training_dataset.csv')
+
+# alg, M, lr, min_ort, max_epoch, trace (= 0)
+hebbiano.train('oja', 9, 0.001, 0.00001, 600, 1)
+hebbiano.plot()
+```
+
 ## Experimentación
 
 Los experimentos se pueden ejecutar con
@@ -36,8 +48,6 @@ jupyeter lab
 ```
 
 TBD descripción de cada archivo de experimentación.
-
-## Setup
 
 ## Setup
 
