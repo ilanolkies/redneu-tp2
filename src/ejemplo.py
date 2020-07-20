@@ -13,8 +13,8 @@ labels_test = labels[700:]
 
 modelo = Hebbiano(data_train)
 
-errors = modelo.train('oja', 9, 0.00001, 0.001, 800, 100)
+errors = modelo.train('oja', 9, 0.00001, 0.001, 1500, 100)
 
-# plot_error(errors)
-# plot(modelo.test(data_train), labels_train)
-# plot(modelo.test(data_test), labels_test)
+plot_error(errors)
+plot(modelo.test(data_train), labels_train)
+plot(modelo.test(data_test), labels_test)
