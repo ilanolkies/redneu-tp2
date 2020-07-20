@@ -1,10 +1,19 @@
+from dataset import load_dataset
 from hebbiano import Hebbiano
+from plotter import plot
 
-hebbiano = Hebbiano('./dataset/tp2_training_dataset.csv')
+data, labels = load_dataset('./dataset/tp2_training_dataset.csv')
 
-# alg, M, lr, min_ort, max_epoch, trace (= 0)
-#hebbiano.train('oja', 9, 0.00001, 0.001, 600, 1)
-#hebbiano.plot()
+data_train = data[:700]
+labels_train = labels[:700]
 
-hebbiano.train('sanger', 9, 0.001, 0.001, 600, 1)
-hebbiano.plot()
+data_test = data[700:]
+labels_test = labels[700:]
+
+modelo = Hebbiano(data_train)
+
+modelo.train('sanger', 9, 0.001, 0.001, 600, 100)
+
+y = modelo.test(data_test)
+
+plot(y, labels_test)

@@ -1,10 +1,16 @@
-from dataset import load_dataset, normalize
 import numpy as np
-from matplotlib import pyplot as mpl
-from mpl_toolkits.mplot3d import Axes3D
+
+def normalizar(X):
+    return (X - X.mean(axis=0)) / X.std()
+
+def initW(N, M):
+    return np.random.normal(0, 0.1, (N, M))
 
 def ortogonalidad(W, M):
-    return np.sum(np.abs(np.dot(W.T,W) - np.identity(M)))/2
+    return np.sum(np.abs(np.dot(W.T, W) - np.identity(M))) / 2
+
+def adapt_lr(o, t, lr):
+    return 0.001 / t if o < 4 and t % 30 == 0 else lr
 
 def regla_oja(X, W, h, lr):
     y = np.dot(X[h], W)
@@ -17,17 +23,16 @@ def regla_sanger(X, W, M, h, lr):
     z = np.dot( W, np.array([y]).T*d)
     return lr * (np.array([X[h]]).T - z) * y
 
+def activacion(X, W):
+    return np.dot(X, W)
 
 class Hebbiano:
-    def __init__(self, dataset_dir):
-        data, self.labels = load_dataset(dataset_dir)
-        X = normalize(data)
-
-        self.X = X
+    def __init__(self, X):
+        self.X = normalizar(X)
         self.P, self.N = X.shape
 
     def train(self, alg, M, lr, min_ort, max_epoch, trace = 0):
-        W = np.random.normal( 0, 0.1, (self.N, M))
+        W = initW(self.N, M)
 
         t = 0
         o = ortogonalidad(W, M)
@@ -36,11 +41,9 @@ class Hebbiano:
             o = ortogonalidad(W, M)
             if (trace != 0 and t % trace == 0): print(o)
 
-            #sanger lr adaptative.
+            # adaptacion de lr para sanger
             if(alg == 'sanger'):
-                if(o < 4):
-                    if t % 30 == 0:
-                        lr=0.001/t
+                lr = adapt_lr(o, t, lr)
 
             for h in range(self.P):
                 if alg == 'oja':
@@ -50,20 +53,5 @@ class Hebbiano:
 
         self.W = W
 
-    def plot(self):
-        #Activacion
-        y = np.dot(self.X, self.W)
-        #Agrego la categoria a las instancias
-        y = np.append(y, self.labels, axis=1)
-
-        #Grafico
-        fig = mpl.figure()
-        xyz = fig.add_subplot(131, projection='3d')
-        xyz.scatter3D(y[:,0], y[:,1], y[:,2], 'b.', c=y[:,9], s=7)
-
-        xyz2 = fig.add_subplot(132, projection='3d')
-        xyz2.scatter3D(y[:,3], y[:,4], y[:,5], 'b.', c=y[:,9], s=7)
-
-        xyz3 = fig.add_subplot(133, projection='3d')
-        xyz3.scatter3D(y[:,6], y[:,7], y[:,8], 'b.', c=y[:,9], s=7)
-        mpl.show()
+    def test(self, X):
+        return activacion(X, self.W)
