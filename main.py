@@ -14,7 +14,7 @@ if not path.exists(nombre_modelo + '.p'):
 
   alg = sys.argv[3]
   if alg == 'oja':
-    errors = modelo.train('oja', 9, 0.00001, 0.0001, 1500, 100) 
+    errors = modelo.train('oja', 9, 0.00001, 0.0001, 2000, 100) #0.001651126636278498
   elif alg == 'sanger':
     errors = modelo.train('sanger', 9, 0.00001, 0.001, 2000, 100) #0.04134266836522473
 
