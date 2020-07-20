@@ -65,7 +65,7 @@ Los experimentos se pueden ejecutar con
 jupyeter lab
 ```
 
-TBD descripción de cada archivo de experimentación.
+Los gráficos del informe fueron generados con ejemplo_oja.py y ejemplo_sanger.py
 
 ## Setup
 
