@@ -1,7 +1,6 @@
 from dataset import load_dataset
 from hebbiano import Hebbiano
 from plotter import plot, plot_error
-from matplotlib import pyplot as plt
 
 data, labels = load_dataset('./dataset/tp2_training_dataset.csv')
 
