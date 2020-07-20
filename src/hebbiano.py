@@ -10,8 +10,8 @@ def initW(N, M):
 def ortogonalidad(W, M):
     return np.sum(np.abs(np.dot(W.T, W) - np.identity(M))) / 2
 
-def adapt_lr(o, t, lr):
-    return lr/10 if o < 0.017 and o > 0.008 and t % 100 == 0 else lr
+def adapt_lr(o, t, lr, r):
+    return lr/10 if o < r[0] and o > r[1] and t % 100 == 0 else lr
     #return 0.001 / t if o < 4 and t % 30 == 0 else lr
 
 def regla_oja(X, W, h, lr):
@@ -48,12 +48,10 @@ class Hebbiano:
             if (trace != 0 and t % trace == 0): print(o)
 
             # adaptacion de lr para sanger
-            #if(alg == 'sanger'):
-<<<<<<< HEAD
-            lr = adapt_lr(o, t, lr)
-=======
-                #lr = adapt_lr(o, lr)
->>>>>>> f434444232265ec97bd7203e285cf807c3da2fa2
+            if alg == 'oja':
+                lr = adapt_lr(o, t, lr, (0.017, 0.008))
+            elif alg == 'sanger':
+                lr = adapt_lr(o, t, lr, (0.038, 0.0379))
 
             for h in range(self.P):
                 if alg == 'oja':
