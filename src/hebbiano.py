@@ -49,7 +49,11 @@ class Hebbiano:
 
             # adaptacion de lr para sanger
             #if(alg == 'sanger'):
+<<<<<<< HEAD
             lr = adapt_lr(o, t, lr)
+=======
+                #lr = adapt_lr(o, lr)
+>>>>>>> f434444232265ec97bd7203e285cf807c3da2fa2
 
             for h in range(self.P):
                 if alg == 'oja':
