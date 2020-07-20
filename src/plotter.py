@@ -2,8 +2,8 @@ import numpy as np
 from matplotlib import pyplot as mpl
 from mpl_toolkits.mplot3d import Axes3D
 
-def plot(y, labels, s = 5):
-    c = labels[:,0]
+def plot(y, labels, s = 5, colors = ['red', 'green', 'orange', 'blue', 'gray', 'brown', 'purple', 'cyan', 'black']):
+    c = [colors[labels[i][0] - 1] for i in range(len(labels))]
 
     fig = mpl.figure()
 

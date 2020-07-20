@@ -12,7 +12,7 @@ labels_test = labels[700:]
 
 modelo = Hebbiano(data_train)
 
-modelo.train('sanger', 9, 0.001, 0.001, 600, 100)
+modelo.train('oja', 9, 0.001, 0.001, 50, 10)
 
 y = modelo.test(data_test)
 

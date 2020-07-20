@@ -1,6 +1,6 @@
 # Redes neuronales artificiales - Trabajo práctico 2
 
-Implementación de redes de parendizaje no supervisado 
+Implementación de redes de parendizaje no supervisado
 
 
 ## Aprendizaje Hebbiano no supervisado
