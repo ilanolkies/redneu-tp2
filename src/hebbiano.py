@@ -1,4 +1,5 @@
 import numpy as np
+import pickle
 
 def normalizar(X):
     return (X - X.mean(axis=0)) / X.std()
@@ -27,9 +28,10 @@ def activacion(X, W):
     return np.dot(X, W)
 
 class Hebbiano:
-    def __init__(self, X):
-        self.X = normalizar(X)
-        self.P, self.N = X.shape
+    def __init__(self, X = np.zeros((1, 1))):
+        if X.shape != (1, 1):
+            self.X = normalizar(X)
+            self.P, self.N = X.shape
 
     def train(self, alg, M, lr, min_ort, max_epoch, trace = 0):
         W = initW(self.N, M)
@@ -55,3 +57,9 @@ class Hebbiano:
 
     def test(self, X):
         return activacion(X, self.W)
+
+    def save(self, path):
+        pickle.dump(self.W, open(path, 'wb'))
+
+    def load(self, path):
+        self.W = pickle.load(open(path, 'rb'))

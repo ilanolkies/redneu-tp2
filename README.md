@@ -9,18 +9,36 @@ Mediante las reglas de aprendizaje de **Oja** y de **Sanger**
 
 <!-- ## Aprendizaje Competitivo -->
 
-## Modelos propuestos
+## Modelos entrenados
 
 Modelo entrenado con Oja
 
 ```
-TBD
+python main.py oja_model PATH_DATASET
 ```
 
 Modelo entrenado con Sanger
 
 ```
-TBD
+python main.py sanger_model PATH_DATASET
+```
+
+## Entrenar modelo
+
+```
+python main.py NOMBRE_MODELO PATH_DATASET ALG
+```
+
+Entrenar con Oja:
+
+```
+python main.py NOMBRE_MODELO PATH_DATASET oja
+```
+
+Entrenar con Sanger:
+
+```
+python main.py NOMBRE_MODELO PATH_DATASET sanger
 ```
 
 ## Implementación
