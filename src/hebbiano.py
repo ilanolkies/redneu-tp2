@@ -36,11 +36,14 @@ class Hebbiano:
     def train(self, alg, M, lr, min_ort, max_epoch, trace = 0):
         W = initW(self.N, M)
 
+        O = []
+
         t = 0
         o = ortogonalidad(W, M)
         while(o > min_ort and t <= max_epoch):
             t+=1
             o = ortogonalidad(W, M)
+            O += [o]
             if (trace != 0 and t % trace == 0): print(o)
 
             # adaptacion de lr para sanger
@@ -54,6 +57,7 @@ class Hebbiano:
                     W += regla_sanger(self.X, W, M, h, lr)
 
         self.W = W
+        return O
 
     def test(self, X):
         return activacion(X, self.W)

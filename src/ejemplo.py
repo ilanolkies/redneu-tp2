@@ -1,6 +1,7 @@
 from dataset import load_dataset
 from hebbiano import Hebbiano
 from plotter import plot
+from matplotlib import pyplot as plt
 
 data, labels = load_dataset('./dataset/tp2_training_dataset.csv')
 
@@ -12,7 +13,10 @@ labels_test = labels[700:]
 
 modelo = Hebbiano(data_train)
 
-modelo.train('oja', 9, 0.001, 0.001, 50, 10)
+errors = modelo.train('oja', 9, 0.001, 0.001, 50, 10)
+
+plt.plot(errors)
+plt.show()
 
 y = modelo.test(data_test)
 
